@@ -6,7 +6,9 @@ import app from './App.vue'
 
 import router from './router'
 
-console.log('ok')
+// 按需引入 mint-ui 组件
+import { Header } from 'mint-ui'
+Vue.component(Header.name, Header)
 
 var vm = new Vue({
   el: '#app',
