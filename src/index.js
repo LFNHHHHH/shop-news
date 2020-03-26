@@ -2,6 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
+import VueResource from 'vue-resource'
+Vue.use(VueResource)
+Vue.http.options.root = 'http://www.liulongbin.top:3005/'
+
 // 引入 MUI 样式文件
 import './lib/mui/css/mui.min.css'
 import './lib/mui/css/icons-extra.css'
