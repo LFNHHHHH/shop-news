@@ -6,6 +6,7 @@ import app from './App.vue'
 
 // 引入 MUI 样式文件
 import './lib/mui/css/mui.min.css'
+import './lib/mui/css/icons-extra.css'
 
 import router from './router'
 
