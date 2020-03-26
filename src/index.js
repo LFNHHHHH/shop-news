@@ -4,6 +4,9 @@ Vue.use(VueRouter)
 
 import app from './App.vue'
 
+// 引入 MUI 样式文件
+import './lib/mui/css/mui.min.css'
+
 import router from './router'
 
 // 按需引入 mint-ui 组件
