@@ -3,7 +3,8 @@
     <!-- 顶部 Header 区域 -->
     <mt-header fixed title="Hello"></mt-header>
 
-    <h3>这是 App 组件</h3>
+    <!-- 中间的 路由 router-view 区域 -->
+    <router-view></router-view>
 
     <!-- 底部 Tabbar 区域 -->
     <nav class="mui-bar mui-bar-tab">
