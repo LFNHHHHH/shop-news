@@ -6,6 +6,8 @@ import app from './App.vue'
 
 import router from './router'
 
+console.log('ok')
+
 var vm = new Vue({
   el: '#app',
   render: c => c(app),
