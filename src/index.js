@@ -18,10 +18,11 @@ import './lib/mui/css/mui.min.css'
 import './lib/mui/css/icons-extra.css'
 
 // 按需引入 mint-ui 组件
-import { Header, Swipe, SwipeItem } from 'mint-ui'
+import { Header, Swipe, SwipeItem, Button } from 'mint-ui'
 Vue.component(Header.name, Header)
 Vue.component(Swipe.name, Swipe)
 Vue.component(SwipeItem.name, SwipeItem)
+Vue.component(Button.name, Button)
 
 import app from './App.vue'
 
