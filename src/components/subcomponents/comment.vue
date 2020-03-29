@@ -7,24 +7,44 @@
     <mt-button type="primary" size="large">发表评论</mt-button>
 
     <div class="cmt-list">
-      <div class="cmt-item">
-        <div class="cmt-title">第31楼&nbsp;&nbsp;用户：放大&nbsp;&nbsp;发表时间：4314321432</div>
-        <div class="cmt-body">范德萨放大范德萨防守打法阿萨德发的发送到萨发送</div>
-      </div>
-      <div class="cmt-item">
-        <div class="cmt-title">第31楼&nbsp;&nbsp;用户：放大&nbsp;&nbsp;发表时间：4314321432</div>
-        <div class="cmt-body">范德萨放大范德萨防守打法阿萨德发的发送到萨发送</div>
-      </div>
-      <div class="cmt-item">
-        <div class="cmt-title">第31楼&nbsp;&nbsp;用户：放大&nbsp;&nbsp;发表时间：4314321432</div>
-        <div class="cmt-body">范德萨放大范德萨防守打法阿萨德发的发送到萨发送</div>
+      <div class="cmt-item" v-for="(item, i) in comments" :key="i">
+        <div
+          class="cmt-title"
+        >第{{ i + 1 }}楼&nbsp;&nbsp;用户：{{ item.user_name }}&nbsp;&nbsp;发表时间：{{ item.add_time | dateFormat }}</div>
+        <div class="cmt-body">{{ item.content === null ? '该用户未发表内容' : item.content }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { Toast } from "mint-ui";
+
+export default {
+  data() {
+    return {
+      comments: {},
+      pageIndex: 1
+    };
+  },
+  created() {
+    this.getComments();
+  },
+  methods: {
+    getComments() {
+      this.$http
+        .get("api/getcomments/" + this.id + "?pageindex=" + this.pageIndex)
+        .then(result => {
+          if (result.body.status === 0) {
+            this.comments = result.body.message;
+          } else {
+            Toast("获取数据失败...");
+          }
+        });
+    }
+  },
+  props: ["id"]
+};
 </script>
 
 <style lang="scss" scoped>
