@@ -11,9 +11,11 @@
         <div
           class="cmt-title"
         >第{{ i + 1 }}楼&nbsp;&nbsp;用户：{{ item.user_name }}&nbsp;&nbsp;发表时间：{{ item.add_time | dateFormat }}</div>
-        <div class="cmt-body">{{ item.content === null ? '该用户未发表内容' : item.content }}</div>
+        <div class="cmt-body">{{ item.content === '' ? '该用户未发表内容' : item.content }}</div>
       </div>
     </div>
+
+    <mt-button type="danger" size="large" plain @click="getMore">加载更多</mt-button>
   </div>
 </template>
 
@@ -23,7 +25,7 @@ import { Toast } from "mint-ui";
 export default {
   data() {
     return {
-      comments: {},
+      comments: [],
       pageIndex: 1
     };
   },
@@ -32,15 +34,21 @@ export default {
   },
   methods: {
     getComments() {
+      // 获取评论
       this.$http
         .get("api/getcomments/" + this.id + "?pageindex=" + this.pageIndex)
         .then(result => {
           if (result.body.status === 0) {
-            this.comments = result.body.message;
+            this.comments = this.comments.concat(result.body.message);
           } else {
             Toast("获取数据失败...");
           }
         });
+    },
+    getMore() {
+      // 加载更多
+      this.pageIndex++;
+      this.getComments();
     }
   },
   props: ["id"]
