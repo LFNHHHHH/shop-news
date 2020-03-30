@@ -52,6 +52,7 @@ export default {
       this.getComments();
     },
     postComment() {
+      // 提交评论
       if (this.msg.trim().length === 0) {
         return Toast("请输入合法的内容...");
       }
