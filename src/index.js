@@ -18,10 +18,14 @@ Vue.filter('dateFormat', function (dataStr, pattern = "YYYY-MM-DD HH:mm:ss") {
 import './lib/mui/css/mui.min.css'
 import './lib/mui/css/icons-extra.css'
 
-// 按需引入 mint-ui 组件
+// 引入 mint-ui 组件
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 Vue.use(MintUI)
+
+// 使用 vue2-preview 缩略图插件
+import VuePreview from 'vue2-preview'
+Vue.use(VuePreview)
 
 import app from './App.vue'
 
