@@ -8,14 +8,10 @@
       >
         <div class="mui-scroll">
           <a
-            class="mui-control-item mui-active"
-            href="#item1mobile"
-            data-wid="tab-top-subpage-1.html"
-          >推荐</a>
-          <a class="mui-control-item" href="#item2mobile" data-wid="tab-top-subpage-2.html">热点</a>
-          <a class="mui-control-item" href="#item3mobile" data-wid="tab-top-subpage-3.html">北京</a>
-          <a class="mui-control-item" href="#item4mobile" data-wid="tab-top-subpage-4.html">社会</a>
-          <a class="mui-control-item" href="#item5mobile" data-wid="tab-top-subpage-5.html">娱乐</a>
+            :class="['mui-control-item', item.id == 0 ? 'mui-active' : '']"
+            v-for="item in cates"
+            :key="item.id"
+          >{{ item.title }}</a>
         </div>
       </div>
     </div>
@@ -23,11 +19,17 @@
 </template>
 
 <script>
+import { Toast } from "mint-ui";
 import mui from "../../lib/mui/js/mui.js";
 
 export default {
   data() {
-    return {};
+    return {
+      cates: []
+    };
+  },
+  created() {
+    this.getAllCatgory();
   },
   mounted() {
     mui(".mui-scroll-wrapper").scroll({
@@ -35,7 +37,21 @@ export default {
       deceleration: 0.0005
     });
   },
-  methods: {}
+  methods: {
+    getAllCatgory() {
+      this.$http.get("api/getimgcategory").then(result => {
+        if (result.body.status === 0) {
+          result.body.message.unshift({
+            title: "全部",
+            id: 0
+          });
+          this.cates = result.body.message;
+        } else {
+          Toast("获取数据失败...");
+        }
+      });
+    }
+  }
 };
 </script>
 
