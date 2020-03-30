@@ -6,6 +6,7 @@ Vue.use(VueRouter)
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
 Vue.http.options.root = 'http://www.liulongbin.top:3005/'
+Vue.http.options.emulateJSON = true
 
 // 导入 moment 格式化时间的插件
 import moment from 'moment'
