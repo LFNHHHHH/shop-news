@@ -3,7 +3,7 @@
     <!-- 商品轮播图区域 -->
     <div class="mui-card">
       <div class="mui-card-content">
-        <div class="mui-card-content-inner">这是一个最简单的卡片视图控件；卡片视图常用来显示完整独立的一段信息，比如一篇文章的预览图、作者信息、点赞数量等</div>
+        <swiper :lunbotuList="lunbotu" :isfull="false"></swiper>
       </div>
     </div>
 
@@ -29,6 +29,7 @@
 
 <script>
 import { Toast } from "mint-ui";
+import swiper from "../../components/subcomponents/swiper.vue";
 
 export default {
   data() {
@@ -43,13 +44,20 @@ export default {
   methods: {
     getLunbotu() {
       this.$http.get("api/getthumimages/" + this.id).then(result => {
+        console.log(result.body);
         if (result.body.status === 0) {
+          result.body.message.forEach(item => {
+            item.src = item.img;
+          });
           this.lunbotu = result.body.message;
         } else {
           Toast("获取数据失败...");
         }
       });
     }
+  },
+  components: {
+    swiper
   }
 };
 </script>
