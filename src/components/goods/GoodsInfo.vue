@@ -9,9 +9,23 @@
 
     <!-- 商品购买区域 -->
     <div class="mui-card">
-      <div class="mui-card-header">页眉</div>
+      <div class="mui-card-header">小米手机5</div>
       <div class="mui-card-content">
-        <div class="mui-card-content-inner">包含页眉页脚的卡片，页眉常用来显示面板标题，页脚用来显示额外信息或支持的操作（比如点赞、评论等）</div>
+        <div class="mui-card-content-inner">
+          <p class="price">
+            市场价：
+            <del>￥2499</del>&nbsp;&nbsp;销售价：
+            <span class="now_price">￥1999</span>
+          </p>
+          <p>
+            购买数量：
+            <numbox></numbox>
+          </p>
+          <p>
+            <mt-button type="primary" size="small">立即购买</mt-button>
+            <mt-button type="danger" size="small">加入购物车</mt-button>
+          </p>
+        </div>
       </div>
     </div>
 
@@ -30,6 +44,7 @@
 <script>
 import { Toast } from "mint-ui";
 import swiper from "../../components/subcomponents/swiper.vue";
+import numbox from "../../components/subcomponents/goodsinfo_numbox.vue";
 
 export default {
   data() {
@@ -44,7 +59,7 @@ export default {
   methods: {
     getLunbotu() {
       this.$http.get("api/getthumimages/" + this.id).then(result => {
-        console.log(result.body);
+        // console.log(result.body);
         if (result.body.status === 0) {
           result.body.message.forEach(item => {
             item.src = item.img;
@@ -57,7 +72,8 @@ export default {
     }
   },
   components: {
-    swiper
+    swiper,
+    numbox
   }
 };
 </script>
