@@ -40,8 +40,8 @@
         </div>
       </div>
       <div class="mui-card-footer">
-        <mt-button type="primary" size="large" plain>图文介绍</mt-button>
-        <mt-button type="danger" size="large" plain>商品评论</mt-button>
+        <mt-button type="primary" size="large" plain @click="goDesc(id)">图文介绍</mt-button>
+        <mt-button type="danger" size="large" plain @click="goComment(id)">商品评论</mt-button>
       </div>
     </div>
   </div>
@@ -67,6 +67,7 @@ export default {
   },
   methods: {
     getLunbotu() {
+      // 获取轮播图片
       this.$http.get("api/getthumimages/" + this.id).then(result => {
         // console.log(result.body);
         if (result.body.status === 0) {
@@ -80,6 +81,7 @@ export default {
       });
     },
     getGoodsInfo() {
+      // 获取商品详情
       this.$http.get("api/goods/getinfo/" + this.id).then(result => {
         if (result.body.status === 0) {
           this.goodsinfo = result.body.message[0];
@@ -87,6 +89,14 @@ export default {
           Toast("获取数据失败...");
         }
       });
+    },
+    goDesc(id) {
+      // 使用编程式导航跳转到图文介绍页面
+      this.$router.push({ name: "goodsdesc", params: { id } });
+    },
+    goComment(id) {
+      // 使用编程式导航跳转到商品评论页面
+      this.$router.push({ name: "goodscomment", params: { id } });
     }
   },
   components: {
