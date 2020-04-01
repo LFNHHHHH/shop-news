@@ -2,15 +2,15 @@
   <div class="shopcar-container">
     <div class="goods-list">
       <!-- 商品列表项区域 -->
-      <div class="mui-card">
+      <div class="mui-card" v-for="item in goodslist" :key="item.id">
         <div class="mui-card-content">
           <div class="mui-card-content-inner">
             <mt-switch></mt-switch>
-            <img src="http://demo.dtcms.net/upload/201504/20/thumb_201504200059017695.jpg" />
+            <img :src="item.thumb_path" />
             <div class="info">
-              <h1>富家大室灵凤大父级的萨克雷父级的</h1>
+              <h1>{{ item.title }}</h1>
               <p>
-                <span class="price">￥2999</span>
+                <span class="price">￥{{ item.sell_price }}</span>
                 <numbox></numbox>
                 <a href="#">删除</a>
               </p>
@@ -40,9 +40,34 @@
 </template>
 
 <script>
+import { Toast } from "mint-ui";
 import numbox from "../subcomponents/shopcar_numbox.vue";
 
 export default {
+  data() {
+    return {
+      goodslist: []
+    };
+  },
+  created() {
+    this.getGoodsList();
+  },
+  methods: {
+    getGoodsList() {
+      var ids = [];
+      this.$store.state.car.forEach(item => {
+        ids.push(item.id);
+      });
+      ids.join(",");
+      this.$http.get("api/goods/getshopcarlist/" + ids).then(result => {
+        if (result.body.status === 0) {
+          this.goodslist = result.body.message;
+        } else {
+          Toast("获取数据失败...");
+        }
+      });
+    }
+  },
   components: {
     numbox
   }
