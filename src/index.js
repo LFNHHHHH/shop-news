@@ -46,6 +46,14 @@ var store = new Vuex.Store({
         }
       })
       localStorage.setItem('car', JSON.stringify(state.car))
+    },
+    removeFormCar(state, id) {
+      state.car.some((item, i) => {
+        if (item.id === id) {
+          state.car.splice(i, 1)
+        }
+      })
+      localStorage.setItem('car', JSON.stringify(state.car))
     }
   },
   getters: {

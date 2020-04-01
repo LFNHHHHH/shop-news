@@ -2,7 +2,7 @@
   <div class="shopcar-container">
     <div class="goods-list">
       <!-- 商品列表项区域 -->
-      <div class="mui-card" v-for="item in goodslist" :key="item.id">
+      <div class="mui-card" v-for="(item, i) in goodslist" :key="item.id">
         <div class="mui-card-content">
           <div class="mui-card-content-inner">
             <mt-switch></mt-switch>
@@ -12,7 +12,7 @@
               <p>
                 <span class="price">￥{{ item.sell_price }}</span>
                 <numbox :initcount="$store.getters.getGoodsCount[item.id]" :goodsId="item.id"></numbox>
-                <a href="#">删除</a>
+                <a href="#" @click.prevent="remove(item.id, i)">删除</a>
               </p>
             </div>
           </div>
@@ -69,6 +69,10 @@ export default {
           Toast("获取数据失败...");
         }
       });
+    },
+    remove(id, index) {
+      this.goodslist.splice(index, 1);
+      this.$store.commit("removeFormCar", id);
     }
   },
   components: {
