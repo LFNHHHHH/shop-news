@@ -120,7 +120,7 @@ export default {
       const yDist = badgePosition.top - ballPosition.top;
 
       el.style.transform = `translate(${xDist}px, ${yDist}px)`;
-      el.style.transition = "all 1s ease";
+      el.style.transition = "all 0.5s cubic-bezier(.4,-0.3,1,.68)";
       done();
     },
     afterEnter(el) {
