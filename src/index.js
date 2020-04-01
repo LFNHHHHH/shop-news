@@ -40,7 +40,7 @@ var store = new Vuex.Store({
     },
     updateGoodsInfo(state, goodsinfo) {
       state.car.some(item => {
-        if (item.id == goodsinfo.id) {
+        if (item.id === goodsinfo.id) {
           item.count = parseInt(goodsinfo.count)
           return true
         }
@@ -51,6 +51,14 @@ var store = new Vuex.Store({
       state.car.some((item, i) => {
         if (item.id === id) {
           state.car.splice(i, 1)
+        }
+      })
+      localStorage.setItem('car', JSON.stringify(state.car))
+    },
+    updateGoodsSelected(state, info) {
+      state.car.forEach(item => {
+        if (item.id === info.id) {
+          item.selected = info.selected
         }
       })
       localStorage.setItem('car', JSON.stringify(state.car))
