@@ -23,7 +23,7 @@
           </p>
           <p>
             购买数量：
-            <numbox></numbox>
+            <numbox @getcount="getSelectedCount" :max="goodsinfo.stock_quantity"></numbox>
           </p>
           <p>
             <mt-button type="primary" size="small">立即购买</mt-button>
@@ -63,7 +63,8 @@ export default {
       id: this.$route.params.id,
       lunbotu: [],
       goodsinfo: {},
-      ballFlag: false
+      ballFlag: false,
+      selectedCound: 1
     };
   },
   created() {
@@ -125,6 +126,9 @@ export default {
     },
     afterEnter(el) {
       this.ballFlag = !this.ballFlag;
+    },
+    getSelectedCount(count) {
+      this.selectedCound = count;
     }
   },
   components: {
