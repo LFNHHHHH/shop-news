@@ -8,6 +8,20 @@ Vue.use(VueResource)
 Vue.http.options.root = 'http://www.liulongbin.top:3005/'
 Vue.http.options.emulateJSON = true
 
+// 注册 Vuex
+import Vuex from 'vuex'
+Vue.use(Vuex)
+
+var store = new Vuex.Store({
+  state: {
+    // 将 购物车中的商品的数据，用一个数组存储起来，在 car 数组中，存储一些商品的对象
+    // { id:商品的id, count: 要购买的数量, price: 商品的单价，selected: false  }
+    car: []
+  },
+  mutations: {},
+  getters: {}
+})
+
 // 导入 moment 格式化时间的插件
 import moment from 'moment'
 Vue.filter('dateFormat', function (dataStr, pattern = "YYYY-MM-DD HH:mm:ss") {
@@ -34,5 +48,6 @@ import router from './router'
 var vm = new Vue({
   el: '#app',
   render: c => c(app),
-  router
+  router,
+  store
 })
