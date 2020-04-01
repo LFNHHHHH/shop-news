@@ -63,7 +63,7 @@ export default {
       id: this.$route.params.id,
       lunbotu: [],
       goodsinfo: {},
-      ballFlag: true
+      ballFlag: false
     };
   },
   created() {
