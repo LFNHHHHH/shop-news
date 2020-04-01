@@ -12,7 +12,7 @@ Vue.http.options.emulateJSON = true
 import Vuex from 'vuex'
 Vue.use(Vuex)
 
-var car = JSON.parse(localStorage.getItem('car'))
+var car = JSON.parse(localStorage.getItem('car') || '[]')
 
 var store = new Vuex.Store({
   state: {
