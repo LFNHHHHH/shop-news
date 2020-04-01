@@ -18,8 +18,30 @@ var store = new Vuex.Store({
     // { id:商品的id, count: 要购买的数量, price: 商品的单价，selected: false  }
     car: []
   },
-  mutations: {},
-  getters: {}
+  mutations: {
+    addToCar(state, goodsinfo) {  // 添加到购物车
+      var flag = false
+      state.car.some(item => {  // 判断商品是否存在，存在则更新商品数量
+        if (item.id === goodsinfo.id) {
+          item.count += parseInt(goodsinfo.count)
+          flag = true
+          return true
+        }
+      })
+      if (flag === false) {  // 商品不存在则添加商品
+        state.car.push(goodsinfo)
+      }
+    }
+  },
+  getters: {
+    getAllCount(state) {
+      var count = 0
+      state.car.forEach(item => {
+        count += item.count
+      })
+      return count
+    }
+  }
 })
 
 // 导入 moment 格式化时间的插件
