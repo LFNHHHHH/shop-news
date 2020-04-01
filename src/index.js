@@ -37,6 +37,15 @@ var store = new Vuex.Store({
       }
 
       localStorage.setItem('car', JSON.stringify(state.car))
+    },
+    updateGoodsInfo(state, goodsinfo) {
+      state.car.some(item => {
+        if (item.id == goodsinfo.id) {
+          item.count = parseInt(goodsinfo.count)
+          return true
+        }
+      })
+      localStorage.setItem('car', JSON.stringify(state.car))
     }
   },
   getters: {

@@ -11,7 +11,7 @@
               <h1>{{ item.title }}</h1>
               <p>
                 <span class="price">￥{{ item.sell_price }}</span>
-                <numbox :initcount="$store.getters.getGoodsCount[item.id]"></numbox>
+                <numbox :initcount="$store.getters.getGoodsCount[item.id]" :goodsId="item.id"></numbox>
                 <a href="#">删除</a>
               </p>
             </div>
@@ -58,6 +58,9 @@ export default {
       this.$store.state.car.forEach(item => {
         ids.push(item.id);
       });
+      if (ids.length <= 0) {
+        return;
+      }
       ids.join(",");
       this.$http.get("api/goods/getshopcarlist/" + ids).then(result => {
         if (result.body.status === 0) {
